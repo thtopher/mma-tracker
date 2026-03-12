@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { Plus, Download, Upload, LayoutGrid, DollarSign, Layers } from 'lucide-react';
 import mmaLogo from '../../assets/mma-logo.png';
+import thsLogo from '../../assets/ths-logo.png';
 import { useBaseballCard } from '../../hooks/useBaseballCard';
 import { SpotlightGrid } from './SpotlightGrid';
 import { RosterList } from './RosterList';
@@ -52,12 +53,14 @@ export function BaseballCardLayout() {
     <div className="mx-auto max-w-6xl space-y-6">
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <img src={mmaLogo} alt="Marsh McLennan Agency" className="h-8 w-auto" />
-          <div>
-            <h1 className="text-xl font-bold text-mma-dark-blue">MMA Master Tracker</h1>
-            <p className="text-sm text-mma-blue-gray">Production tasks as of March 9, 2026</p>
-          </div>
+          <div className="h-8 w-px bg-gray-300" />
+          <img src={thsLogo} alt="Third Horizon" className="h-8 w-auto" />
+        </div>
+        <div className="text-center">
+          <h1 className="text-xl font-bold text-mma-dark-blue">Master Tracker</h1>
+          <p className="text-sm text-mma-blue-gray">Production tasks as of March 9, 2026</p>
         </div>
         <div className="flex items-center gap-2">
           <button
