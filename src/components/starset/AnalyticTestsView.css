@@ -1,0 +1,475 @@
+/* ================================================================
+   ANALYTIC TESTS VIEW — MMA Branded
+   ================================================================ */
+
+.at-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Slide Nav Bar */
+.at-slide-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid #C4D8E8;
+  box-shadow: 0 -4px 16px rgba(0, 44, 119, 0.06);
+}
+
+.at-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #C4D8E8;
+  border-radius: 8px;
+  background: #fff;
+  color: #002C77;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.at-nav-btn:hover {
+  background: #E8F4F8;
+  border-color: #009DE0;
+}
+.at-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.at-nav-btn:disabled:hover {
+  background: #fff;
+  border-color: #C4D8E8;
+}
+
+.at-nav-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.at-nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #C4D8E8;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.at-nav-dot:hover {
+  border-color: #009DE0;
+  transform: scale(1.2);
+}
+.at-nav-dot.active {
+  background: #002C77;
+  border-color: #002C77;
+  transform: scale(1.2);
+}
+
+.at-slide-counter {
+  font-family: "Fira Code", monospace;
+  font-size: 0.8rem;
+  color: #5A6A7A;
+  margin: 0 8px;
+  min-width: 44px;
+  text-align: center;
+}
+
+.at-nav-btn:focus-visible,
+.at-nav-dot:focus-visible {
+  outline: 3px solid #009DE0;
+  outline-offset: 2px;
+}
+
+/* Slide System */
+.at-deck {
+  min-height: 100vh;
+  padding-bottom: 70px;
+}
+
+.at-slide {
+  display: none;
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: 40px 0 32px;
+  min-height: calc(100vh - 70px);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.at-slide.active {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Title Slide */
+.at-title-slide {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.at-title-slide .at-kicker {
+  font: 500 0.9rem/1.2 "Fira Code", monospace;
+  color: #002C77;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 16px;
+}
+.at-title-slide h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.15;
+  color: #001A41;
+  margin: 0 0 16px;
+  max-width: 18ch;
+}
+.at-title-slide .at-subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: #5A6A7A;
+  margin: 0 0 32px;
+  max-width: 50ch;
+}
+.at-title-slide .at-setup {
+  font-size: 1rem;
+  color: #1A2A3A;
+  margin: 0;
+  max-width: 60ch;
+  line-height: 1.7;
+}
+.at-title-slide .at-attribution {
+  margin-top: 48px;
+  font: 500 0.82rem/1.4 "Fira Code", monospace;
+  color: #5A6A7A;
+  letter-spacing: 0.02em;
+}
+
+/* Test Slide */
+.at-test-slide { gap: 0; }
+
+.at-slide-header { margin-bottom: 20px; }
+.at-slide-header .at-test-label {
+  display: inline-block;
+  font: 500 0.78rem/1.2 "Fira Code", monospace;
+  color: #002C77;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
+  padding: 3px 10px;
+  background: #E8F4F8;
+  border-radius: 999px;
+}
+.at-slide-header h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.2;
+  color: #001A41;
+  margin: 0 0 6px;
+}
+.at-slide-header .at-hook-question {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: #5A6A7A;
+  margin: 0;
+  font-style: italic;
+  max-width: 65ch;
+}
+
+/* Challenge / Solution */
+.at-split-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.at-panel-card {
+  padding: 16px 18px;
+  border-radius: 8px;
+  border: 1px solid;
+}
+.at-panel-card h3 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 8px;
+}
+.at-panel-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.at-challenge-card {
+  background: #FFFBEB;
+  border-color: #FDE68A;
+}
+.at-challenge-card h3 { color: #92400E; }
+.at-challenge-card p { color: #78350F; }
+.at-solution-card {
+  background: #ECFDF5;
+  border-color: #A7F3D0;
+}
+.at-solution-card h3 { color: #065F46; }
+.at-solution-card p { color: #064E3B; }
+
+/* Evidence Table */
+.at-evidence-section { margin-bottom: 16px; }
+.at-evidence-section .at-section-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #002C77;
+  margin: 0 0 10px;
+}
+.at-evidence-wrap {
+  border: 1px solid #C4D8E8;
+  border-radius: 8px;
+  background: #fff;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(0, 44, 119, 0.06);
+}
+.at-evidence-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+.at-evidence-table caption {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: #5A6A7A;
+  border-bottom: 1px solid #C4D8E8;
+  background: #F5FAFA;
+}
+.at-evidence-table th {
+  text-align: left;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #5A6A7A;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid #002C77;
+  white-space: nowrap;
+}
+.at-evidence-table td {
+  padding: 8px 14px;
+  border-bottom: 1px solid #C4D8E8;
+  color: #1A2A3A;
+}
+.at-evidence-table tbody tr:last-child td { border-bottom: none; }
+.at-evidence-table tbody tr:hover { background: #F0F7FA; }
+.at-evidence-table .num {
+  text-align: right;
+  font-family: "Fira Code", monospace;
+  font-size: 0.84rem;
+}
+.at-evidence-table .highlight-row {
+  background: #E8F4F8;
+  font-weight: 500;
+}
+.at-evidence-table .absent {
+  color: #DC2626;
+  font-style: italic;
+}
+.at-evidence-table .present {
+  color: #059669;
+}
+
+/* Grouped table styles (Test D) */
+.at-grouped-table .group-start td {
+  border-top: 2px solid #009DE0;
+}
+.at-grouped-table td[rowSpan] {
+  vertical-align: middle;
+  font-weight: 600;
+  background: #fff;
+}
+.at-grouped-table .highlight-row td {
+  background: #FEF3C7;
+  color: #92400E;
+  font-weight: 600;
+}
+.at-grouped-table .normalized-row td {
+  background: #ECFDF5;
+}
+
+.at-evidence-table .flag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.at-flag-case-rate { background: #E8F4F8; color: #002C77; }
+.at-flag-insufficient { background: #FEF3C7; color: #92400E; }
+.at-flag-base { background: #D1FAE5; color: #065F46; }
+
+.at-table-footer {
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  color: #5A6A7A;
+  border-top: 1px solid #C4D8E8;
+  background: #F5FAFA;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Why It Matters */
+.at-implication {
+  padding: 12px 16px;
+  border-left: 4px solid #00968F;
+  background: #FFFBEB;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 16px;
+}
+.at-implication h3 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #92400E;
+  margin: 0 0 4px;
+}
+.at-implication p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #78350F;
+  line-height: 1.6;
+}
+
+/* Expandable */
+.at-expandable-section { display: none; }
+.at-expandable-section[data-has-detail="true"] { display: block; }
+.at-expandable-section details {
+  border: 1px solid #C4D8E8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.at-expandable-section summary {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #002C77;
+  background: #F5FAFA;
+  list-style: none;
+  user-select: none;
+}
+.at-expandable-section summary::-webkit-details-marker { display: none; }
+.at-expandable-section summary::before {
+  content: "\25B6";
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 0.7em;
+  transition: transform 0.2s ease;
+}
+.at-expandable-section details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+/* CTA Slide */
+.at-cta-slide {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.at-cta-slide h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  color: #001A41;
+  margin: 0 0 20px;
+  max-width: 22ch;
+  line-height: 1.2;
+}
+.at-cta-slide .at-summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  max-width: 48ch;
+}
+.at-cta-slide .at-summary-list li {
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid #C4D8E8;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  box-shadow: 0 1px 3px rgba(0, 44, 119, 0.06);
+}
+.at-cta-slide .at-summary-list li strong {
+  color: #001A41;
+}
+.at-cta-slide .at-cta-prompt {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: #5A6A7A;
+  margin: 0 0 12px;
+  font-style: italic;
+}
+.at-cta-slide .at-contact-placeholder {
+  font: 500 0.88rem/1.4 "Fira Code", monospace;
+  color: #002C77;
+}
+.at-cta-slide .at-attribution {
+  margin-top: 48px;
+  font: 500 0.78rem/1.4 "Fira Code", monospace;
+  color: #5A6A7A;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 768px) {
+  .at-split-panel {
+    grid-template-columns: 1fr;
+  }
+  .at-slide {
+    padding: 24px 0 24px;
+  }
+  .at-evidence-table th,
+  .at-evidence-table td {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+}
+
+/* Print */
+@media print {
+  .at-slide-nav { display: none !important; }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .at-slide,
+  .at-nav-dot,
+  .at-nav-btn,
+  .at-expandable-section summary::before {
+    transition-duration: 0.01ms !important;
+  }
+}
