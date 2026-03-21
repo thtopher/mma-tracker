@@ -76,7 +76,7 @@ export function AnalyticTestsView() {
           <p className="at-setup">
             Transparency in Coverage data is now publicly available from every major health insurer. But raw MRF files
             are massive, messy, and full of traps that produce misleading results if not treated properly. These four
-            analytic tests represent the most common data quality challenges we encounter&nbsp;&mdash; and how Third Horizon Solutions
+            analytic tests represent the most common data quality challenges we encounter &mdash; and how Third Horizon Solutions
             addresses each one to deliver intelligence you can act on with confidence.
           </p>
           <p className="at-attribution">Third Horizon Solutions</p>
