@@ -1,0 +1,303 @@
+/* ── MMA Water Treatment View ── */
+/* Rebranded from Starset purple palette to MMA navy/teal palette */
+
+:root {
+  --water-deep: #001A41;
+  --water-mid: #4BA3C3;
+  --water-light: #7EC8C8;
+  --water-pale: #E8F4F8;
+  --water-tint: #F0F7FA;
+  --mma-blue: #009DE0;
+  --mma-teal: #00968F;
+  --mma-navy: #001A41;
+  --mma-mid-navy: #003366;
+}
+
+/* ── Header ── */
+.wt-header {
+  background: linear-gradient(135deg, #001A41 0%, #003366 100%);
+  color: #fff;
+  padding: 48px 24px 36px;
+  text-align: center;
+}
+
+.wt-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.wt-header p {
+  font-size: 1.05rem;
+  opacity: 0.85;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Diagram Wrapper ── */
+.wt-diagram-wrapper {
+  max-width: 960px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+  position: relative;
+}
+
+.wt-diagram {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.wt-diagram img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 26, 65, 0.12);
+}
+
+/* ── Hotspots ── */
+.wt-hotspot {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 157, 224, 0.85);
+  border: 3px solid #fff;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 26, 65, 0.25);
+}
+
+.wt-hotspot:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  background: rgba(0, 157, 224, 1);
+  box-shadow: 0 4px 16px rgba(0, 157, 224, 0.45);
+}
+
+.wt-hotspot.active {
+  transform: translate(-50%, -50%) scale(1.25);
+  background: #001A41;
+  box-shadow: 0 4px 20px rgba(0, 26, 65, 0.5);
+}
+
+/* ── Hint Pulse ── */
+.wt-click-hint {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: var(--water-mid);
+  animation: hintFade 2.5s ease-in-out infinite;
+}
+
+@keyframes hintFade {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes hintPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 150, 143, 0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(0, 150, 143, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 150, 143, 0); }
+}
+
+.wt-hotspot:not(.active) {
+  animation: hintPulse 2s ease-out infinite;
+}
+
+.wt-hotspot:hover,
+.wt-hotspot.active {
+  animation: none;
+}
+
+/* ── Detail Panel ── */
+.wt-detail {
+  max-width: 960px;
+  margin: 32px auto 0;
+  padding: 0 24px;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wt-detail-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 26, 65, 0.1);
+  border: 1px solid var(--water-pale);
+}
+
+/* ── Detail Header ── */
+.wt-detail-header {
+  background: linear-gradient(135deg, #001A41 0%, #003366 100%);
+  color: #fff;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.wt-detail-number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.wt-detail-titles h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.wt-detail-titles p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ── Detail Body ── */
+.wt-detail-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 32px;
+}
+
+.wt-detail-col h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--water-mid);
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.wt-detail-col p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+}
+
+.wt-detail-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wt-detail-col ul li {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #333;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.wt-detail-col ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mma-teal);
+}
+
+/* ── Quality Bar ── */
+.wt-quality {
+  padding: 0 32px 28px;
+}
+
+.wt-quality-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--water-mid);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.wt-quality-track {
+  height: 10px;
+  background: var(--water-pale);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.wt-quality-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.8s ease-out;
+}
+
+/* ── Footer ── */
+.wt-footer {
+  text-align: center;
+  padding: 40px 24px;
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .wt-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .wt-header p {
+    font-size: 0.95rem;
+  }
+
+  .wt-detail-body {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .wt-detail-header {
+    padding: 20px 24px;
+  }
+
+  .wt-detail-body {
+    padding: 24px;
+  }
+
+  .wt-quality {
+    padding: 0 24px 24px;
+  }
+
+  .wt-hotspot {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+}

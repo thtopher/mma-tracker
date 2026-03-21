@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
-import { Plus, Download, Upload, LayoutGrid, DollarSign, Layers, LogOut } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import { Plus, Download, Upload, LayoutGrid, DollarSign, Layers } from 'lucide-react';
 import mmaLogo from '../../assets/mma-logo.png';
 import thsLogo from '../../assets/ths-logo.png';
 import { useBaseballCard } from '../../hooks/useBaseballCard';
@@ -27,7 +26,6 @@ export function BaseballCardLayout() {
     exportToJson, importFromJson,
   } = useBaseballCard();
 
-  const { signOut } = useAuth();
   const [detailProjectId, setDetailProjectId] = useState<string | null>(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [view, setView] = useState<View>('board');
@@ -114,14 +112,6 @@ export function BaseballCardLayout() {
           >
             <Plus className="h-4 w-4 inline -mt-0.5 mr-1" />
             New Card
-          </button>
-          <div className="h-5 w-px bg-gray-300" />
-          <button
-            onClick={signOut}
-            className="rounded p-1.5 text-gray-400 hover:text-red-500 transition-colors"
-            title="Sign out"
-          >
-            <LogOut className="h-4 w-4" />
           </button>
         </div>
       </div>
